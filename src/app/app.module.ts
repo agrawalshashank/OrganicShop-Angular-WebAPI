@@ -1,18 +1,72 @@
+import { AppService } from './user/product/app.service';
+import { GenericError } from './common/error/GenericError';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { RouterModule} from '@angular/router';
+import {Http,HttpModule} from '@angular/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms'
+import { MatDataTableModule } from "ng2-md-datatable";
+import { MatButtonModule, MatIconModule } from "@angular/material";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from './app.component';
+import { ProductComponent } from './user/product/product.component';
+import { CheckoutComponent } from './user/checkout/checkout.component';
+import { PaymentComponent } from './user/payment/payment.component';
+import { OrderhistoryComponent } from './user/orderhistory/orderhistory.component';
+import { ManageProductComponent } from './admin/manage-product/manage-product.component';
+import { ManageUserComponent } from './admin/manage-user/manage-user.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { NavbarComponent } from './common/navbar/navbar.component';
 
+import { LoginService } from './service/auth/login/login.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductComponent,
+    CheckoutComponent,
+    PaymentComponent,
+    OrderhistoryComponent,
+    ManageProductComponent,
+    ManageUserComponent,
+    LoginComponent,
+    RegisterComponent,
+    NavbarComponent
+
+    
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDataTableModule,
+    MatButtonModule,
+    MatIconModule,
+    NgbModule.forRoot(),
+
+    RouterModule.forRoot([
+      {path:'product',component:ProductComponent},
+      {path:'user/checkout', component: CheckoutComponent},
+      {path:'user/payment', component: PaymentComponent},
+      {path:'user/orderhistory', component: OrderhistoryComponent},
+
+      {path:'admin/manageproduct', component: ManageProductComponent},
+      {path:'admin/manageuser', component: ManageUserComponent},
+      
+      {path:'auth/login', component: LoginComponent},
+      {path:'auth/register', component: RegisterComponent}
+            
+    ])
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    GenericError,
+    AppService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

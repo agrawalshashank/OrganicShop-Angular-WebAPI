@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+/* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+/* @import '~@angular/material/_theming.scss'; */
+/* @import "~ng2-md-datatable/datatable-theme";  */
+
+body{
+    padding-top: 4px;
+}
+/* @include angular-material-theme($theme);
+@include mat-datatable-theme($theme); */
+
+
+
