@@ -11,6 +11,7 @@
     <ng2-md-datatable-column sortableValue="name">Name</ng2-md-datatable-column>
     <ng2-md-datatable-column sortableValue="design">Design by</ng2-md-datatable-column>
     <ng2-md-datatable-column sortableValue="size">Available size</ng2-md-datatable-column>
+    <ng2-md-datatable-column></ng2-md-datatable-column>
   </ng2-md-datatable-header>
   <tbody>
     <ng2-md-datatable-row *ngFor="let tshirt of tshirts$ | async" [selectableValue]="tshirt.id">
@@ -18,6 +19,7 @@
       <td>{{ tshirt.name }}</td>
       <td>{{ tshirt.design }}</td>
       <td>{{ tshirt.size }}</td>
+      <td><a [routerLink]="['/admin/manageproduct/',tshirt.id]" >Edit</a></td>
     </ng2-md-datatable-row>
   </tbody>
 </ng2-md-datatable>

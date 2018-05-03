@@ -1,5 +1,3 @@
-import { AppService } from './user/product/app.service';
-import { GenericError } from './common/error/GenericError';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
@@ -21,6 +19,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
 
+import { ProductService } from './service/product/product.service';
+import { AppService } from './user/product/app.service';
+import { GenericError } from './common/error/GenericError';
 import { LoginService } from './service/auth/login/login.service';
 
 @NgModule({
@@ -55,6 +56,7 @@ import { LoginService } from './service/auth/login/login.service';
       {path:'user/orderhistory', component: OrderhistoryComponent},
 
       {path:'admin/manageproduct', component: ManageProductComponent},
+      {path:'admin/manageproduct/:id',component:ManageProductComponent},
       {path:'admin/manageuser', component: ManageUserComponent},
       
       {path:'auth/login', component: LoginComponent},
@@ -65,7 +67,8 @@ import { LoginService } from './service/auth/login/login.service';
   providers: [
     LoginService,
     GenericError,
-    AppService
+    AppService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

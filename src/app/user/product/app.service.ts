@@ -33,10 +33,7 @@ export class AppService {
     sortType?: DatatableSortType
   ): IPaginableTshirts {
     console.log(limit);
-    const offset = (page - 1) * limit;
- console.log(offset);
- console.log(sortBy);
- console.log(sortType);
+    const offset = (page - 1) * limit; 
     let tshirts;
     if (sortBy) {
       tshirts = demoDatasource
