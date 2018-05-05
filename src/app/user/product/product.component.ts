@@ -11,7 +11,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { from } from "rxjs/observable/from";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
-import { IPaginableTshirts, IPagination, ITShirt } from "./app.interfaces";
+import { IPaginableProduct, IPagination,IProduct } from "./app.interfaces";
 import { AppService } from "./app.service";
 
 import {
@@ -31,7 +31,7 @@ import {
 export class ProductComponent implements AfterViewInit,OnDestroy{
     title = "Product";
 
-    tshirts$: BehaviorSubject<ITShirt[]> = new BehaviorSubject([]);
+    tshirts$: BehaviorSubject<IProduct[]> = new BehaviorSubject([]);
     currentSelection$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   
     currentSortBy: string | undefined;
@@ -51,7 +51,9 @@ export class ProductComponent implements AfterViewInit,OnDestroy{
     constructor(
       private appService: AppService,
       private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    ) {
+      
+    }
   
     ngAfterViewInit() {
       if (this.datatable) {
@@ -104,18 +106,30 @@ export class ProductComponent implements AfterViewInit,OnDestroy{
         this.currentSortBy = sortBy;
         this.currentSortType = sortType;
       }
-  
-      const { tshirts, pagination } = this.appService.getDemoDatasource(
+     console.log(this.appService.getProductList(
         page,
         limit,
         sortBy,
         sortType
-      );
-  
-      this.tshirts$.next(tshirts);
-      this.currentSelection$.next([]);
-      this.currentPagination = pagination;
-      this.changeDetectorRef.detectChanges();
+      ));
+
+      this.appService.getProductList( page,
+        limit,
+        sortBy,
+        sortType
+      ).
+      then(response=>{
+        const { product, pagination } = this.appService.getDemoDatasource(
+          page,
+          limit,
+          sortBy,
+          sortType
+        )
+        this.tshirts$.next(product);
+        this.currentSelection$.next([]);
+        this.currentPagination = pagination;
+        this.changeDetectorRef.detectChanges();
+      });       
     }
   }
  

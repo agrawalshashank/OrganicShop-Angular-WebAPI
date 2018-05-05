@@ -1,31 +1,30 @@
 <div class="row">
 <div class="col-md-6">
-<form  (ngSubmit)="Save(data.value)" #data="ngForm" >
+<form  (ngSubmit)="Products(data.value)" #data="ngForm" >
     <div class="form-group">
-      <label for="title"> Title</label>
-        <input type="text" #title="ngModel" [(ngModel)]="product$.title" name="title" id="title" class="form-control">
+      <label for="ProductName"> Title</label>
+        <input type="text" #title="ngModel" [(ngModel)]="product$.ProductName" name="ProductName" id="ProductName" class="form-control">
       </div>
     
       <div class="form-group">
-          <label for="price"> Price</label>
+          <label for="Price"> Price</label>
         <div class="input-group">
         <span class="input-group-addon">$</span>      
-            <input  type="number"  #price="ngModel" [(ngModel)]="product$.price" name="price" id="price" class="form-control">
+            <input type="number"  #price="ngModel" [(ngModel)]="product$.Price" name="Price" id="Price" class="form-control">
           </div>
           </div>
     
-    <div class="form-group"><label for="category">Category</label>
-      <select name="category" #category="ngModel" [(ngModel)]="product$.category"  id="category" class="form-control">
+    <div class="form-group"><label for="Category">Category</label>
+      <select name="Category" #category="ngModel" [(ngModel)]="product$.Category"  id="Category" class="form-control">
       <option value="Dairy Product">Dairy Product </option>
       <option value="Food Product">Food Product</option>
       <option value="Meat Product">Meat Product</option>
     </select></div>
-    
-          
+             
     
           <div class="form-group">
-              <label for="Image"> Image- URL</label>
-                <input type="text" #Image="ngModel" [(ngModel)]="product$.image" name="Image" id="Image" class="form-control">
+              <label for="ImageURL"> Image- URL</label>
+                <input type="text" #Image="ngModel" [(ngModel)]="product$.ImageURL" name="ImageURL" id="ImageURL" class="form-control">
               </div>
                <button class="btn btn-primary">Submit</button>
     

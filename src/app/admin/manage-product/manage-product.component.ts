@@ -11,6 +11,7 @@ import 'rxjs/add/operator/take';
 })
 export class ManageProductComponent implements OnInit {
 product$
+ProductId
 
   constructor(
     private route:Router,
@@ -18,25 +19,47 @@ product$
     private productService:ProductService
   ) { 
     
-    let id= this.activatedRouter.snapshot.paramMap.get("id"); 
-
-    if(id)
+   this.ProductId= this.activatedRouter.snapshot.queryParamMap.get("id"); 
+    if(this.ProductId)
     {
-      this.productService.getProductById(id).subscribe(p=> this.product$=p);
+      this.productService.getProductById(this.ProductId).
+      subscribe(response=>{        
+        this.product$=response.json();        
+      });
     }
 
   }
 
   ngOnInit() {
   }
+ 
+  Products(formData)
+  {
+    console.log(this.ProductId);
+    if(this.ProductId)
+    {
+      this.UpdateProduct(formData);
+    }
+    else
+    {
+      this.Save(formData);
+    }
+  }
 
   Save(formData)
   {
-
-console.log(JSON.stringify(formData))
       //Calls the Service to store the result
-
+     this.productService.saveProduct(formData).
+     subscribe(response=>{
+       console.log("save");
+     });
      this.route.navigate(['/product']);
+  }
+
+  UpdateProduct(formData)
+  {
+     this.productService.updateProduct(formData,this.ProductId)
+     .subscribe();
   }
 
 }

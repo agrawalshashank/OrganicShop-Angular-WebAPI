@@ -14,12 +14,12 @@
     <ng2-md-datatable-column></ng2-md-datatable-column>
   </ng2-md-datatable-header>
   <tbody>
-    <ng2-md-datatable-row *ngFor="let tshirt of tshirts$ | async" [selectableValue]="tshirt.id">
-      <td class="numeric">{{ tshirt.id }}</td>
-      <td>{{ tshirt.name }}</td>
-      <td>{{ tshirt.design }}</td>
-      <td>{{ tshirt.size }}</td>
-      <td><a [routerLink]="['/admin/manageproduct/',tshirt.id]" >Edit</a></td>
+    <ng2-md-datatable-row *ngFor="let tshirt of tshirts$ | async" [selectableValue]="tshirt.ProductId">
+      <td class="numeric">{{ tshirt.ProductId }}</td>
+      <td>{{ tshirt.ProductName }}</td>
+      <td>{{ tshirt.Price }}</td>
+      <td>{{ tshirt.Category }}</td>
+      <td><a [routerLink]="['/admin/manageproduct/']"[queryParams]="{id: tshirt.ProductId}" >Edit</a></td>
     </ng2-md-datatable-row>
   </tbody>
 </ng2-md-datatable>
