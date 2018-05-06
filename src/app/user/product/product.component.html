@@ -1,25 +1,27 @@
 
-
+<div class="paddingtop">
 <button class="btn btn-primary body" routerLink="/admin/manageproduct"> Create New Product</button>
-
+<br>
 <h1>{{ title }}</h1>
 <h3>Your current selection: {{ currentSelection$ | async }}</h3>
 
 <ng2-md-datatable selectable="true">
   <ng2-md-datatable-header>
-    <ng2-md-datatable-column sortableValue="id" numeric>Id</ng2-md-datatable-column>
-    <ng2-md-datatable-column sortableValue="name">Name</ng2-md-datatable-column>
-    <ng2-md-datatable-column sortableValue="design">Design by</ng2-md-datatable-column>
-    <ng2-md-datatable-column sortableValue="size">Available size</ng2-md-datatable-column>
+    <ng2-md-datatable-column sortableValue="ProductId" numeric>Id</ng2-md-datatable-column>
+    <ng2-md-datatable-column sortableValue="ProductName">Name</ng2-md-datatable-column>
+    <ng2-md-datatable-column sortableValue="Price">Prize</ng2-md-datatable-column>
+    <ng2-md-datatable-column sortableValue="Category">Category</ng2-md-datatable-column>
     <ng2-md-datatable-column></ng2-md-datatable-column>
   </ng2-md-datatable-header>
   <tbody>
-    <ng2-md-datatable-row *ngFor="let tshirt of tshirts$ | async" [selectableValue]="tshirt.ProductId">
-      <td class="numeric">{{ tshirt.ProductId }}</td>
-      <td>{{ tshirt.ProductName }}</td>
-      <td>{{ tshirt.Price }}</td>
-      <td>{{ tshirt.Category }}</td>
-      <td><a [routerLink]="['/admin/manageproduct/']"[queryParams]="{id: tshirt.ProductId}" >Edit</a></td>
+    <ng2-md-datatable-row *ngFor="let product of Products$ | async" [selectableValue]="product.ProductId">
+      <td class="numeric">{{ product.ProductId }}</td>
+      <td>{{ product.ProductName }}</td>
+      <td>{{ product.Price }}</td>
+      <td>{{ product.Category }}</td>
+      <td><a [routerLink]="['/admin/manageproduct/']"[queryParams]="{id: product.ProductId}" >Edit</a>
+        <a [routerLink]="['/admin/manageproduct/']"[queryParams]="{id: product.ProductId}" >Delete</a>
+      </td>
     </ng2-md-datatable-row>
   </tbody>
 </ng2-md-datatable>
@@ -33,3 +35,4 @@
   [itemsPerPage]="currentPagination.itemsPerPage"
   [itemsCount]="currentPagination.totalCount" 
   [itemsPerPageChoices]="[2, 5, 10, 15]"></ng2-md-datatable-pagination>
+</div>

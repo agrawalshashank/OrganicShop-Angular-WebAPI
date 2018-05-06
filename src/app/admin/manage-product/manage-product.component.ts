@@ -1,7 +1,8 @@
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../../service/product/product.service';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/takeWhile';
 
 
 @Component({
@@ -9,9 +10,12 @@ import 'rxjs/add/operator/take';
   templateUrl: './manage-product.component.html',
   styleUrls: ['./manage-product.component.css']
 })
-export class ManageProductComponent implements OnInit {
-product$
-ProductId
+export class ManageProductComponent implements OnInit,OnDestroy {
+product ={};
+submitbuttonText :string ="Create";
+delete:string
+ProductId;
+IsAlive:boolean=true;
 
   constructor(
     private route:Router,
@@ -22,9 +26,11 @@ ProductId
    this.ProductId= this.activatedRouter.snapshot.queryParamMap.get("id"); 
     if(this.ProductId)
     {
-      this.productService.getProductById(this.ProductId).
+      this.submitbuttonText="Update";
+      this.delete="delete";
+     this.productService.getProductById(this.ProductId).take(1).
       subscribe(response=>{        
-        this.product$=response.json();        
+        this.product=response.json();        
       });
     }
 
@@ -32,7 +38,10 @@ ProductId
 
   ngOnInit() {
   }
- 
+  ngOnDestroy()
+  {
+    this.IsAlive= false;
+  }
   Products(formData)
   {
     console.log(this.ProductId);
@@ -49,7 +58,7 @@ ProductId
   Save(formData)
   {
       //Calls the Service to store the result
-     this.productService.saveProduct(formData).
+     this.productService.saveProduct(formData).takeWhile(()=>this.IsAlive).
      subscribe(response=>{
        console.log("save");
      });
@@ -58,8 +67,17 @@ ProductId
 
   UpdateProduct(formData)
   {
-     this.productService.updateProduct(formData,this.ProductId)
+     this.productService.updateProduct(formData,this.ProductId).takeWhile(()=> this.IsAlive)
      .subscribe();
+     this.route.navigate(['/product']);
+  }
+
+  DeleteProduct()
+  {
+    this.productService.deleteProduct(this.ProductId).takeWhile(()=>this.IsAlive)
+    .subscribe();
+    this.route.navigate(['/product']);
+    
   }
 
 }

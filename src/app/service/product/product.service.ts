@@ -24,7 +24,7 @@ export class ProductService {
         {
            if(error.status == 404)
            {
-             return _throw(new NotFound404())
+             return _throw(new NotFound404(error))
            }
            else
            {
@@ -40,7 +40,7 @@ export class ProductService {
         {
           if(error.status == 404)
           {
-             return _throw(new NotFound404());
+             return _throw(new NotFound404(error));
           }
           else
           {
@@ -54,6 +54,24 @@ export class ProductService {
     return this.product.put(this.url+'Product/'+ id, JSON.stringify(ProductData),this.options)
   }
 
+  deleteProduct(id)
+  {
+    return this.product.delete(this.url+'Product/'+ id,this.options).
+      catch((error:Response)=>
+      {
+        if(error.status == 404)
+        {
+           return _throw(new NotFound404(error));
+        }
+        else
+        {
+           return _throw(new GenericError());
+        }
+      });
+
+  }
+
+
   getProductById(id:string)
   {
      return this.product.get(this.url +'Product/'+ id).
@@ -61,7 +79,7 @@ export class ProductService {
         {
           if(error.status==404)
           {
-            return _throw(new NotFound404());
+            return _throw(new NotFound404(error));
           }
           else
           {

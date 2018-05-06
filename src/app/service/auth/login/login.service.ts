@@ -22,7 +22,7 @@ export class LoginService {
           .catch((error:Response)=>{
             if(error.status==404)
             {
-              return _throw(new NotFound404())
+              return _throw(new NotFound404(error))
             }
 
             return _throw(new GenericError())

@@ -23,6 +23,7 @@ import { ProductService } from './service/product/product.service';
 import { AppService } from './user/product/app.service';
 import { GenericError } from './common/error/GenericError';
 import { LoginService } from './service/auth/login/login.service';
+import { ProductListComponent } from './user/product-list/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoginService } from './service/auth/login/login.service';
     ManageUserComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProductListComponent
 
     
   ],
@@ -54,6 +56,7 @@ import { LoginService } from './service/auth/login/login.service';
       {path:'user/checkout', component: CheckoutComponent},
       {path:'user/payment', component: PaymentComponent},
       {path:'user/orderhistory', component: OrderhistoryComponent},
+      {path:"productList",component:ProductListComponent},
 
       {path:'admin/manageproduct', component: ManageProductComponent},
       {path:'admin/manageproduct/:id',component:ManageProductComponent},

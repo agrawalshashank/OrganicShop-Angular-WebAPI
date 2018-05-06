@@ -3,7 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     OnDestroy,
-    ViewChild
+    ViewChild,OnInit
   } from "@angular/core";
 
 import { shuffle } from "lodash-es";
@@ -28,10 +28,10 @@ import {
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements AfterViewInit,OnDestroy{
+export class ProductComponent implements OnDestroy,OnInit{
     title = "Product";
 
-    tshirts$: BehaviorSubject<IProduct[]> = new BehaviorSubject([]);
+    Products$: BehaviorSubject<IProduct[]> = new BehaviorSubject([]);
     currentSelection$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   
     currentSortBy: string | undefined;
@@ -55,7 +55,7 @@ export class ProductComponent implements AfterViewInit,OnDestroy{
       
     }
   
-    ngAfterViewInit() {
+    ngOnInit() {
       if (this.datatable) {
         from(this.datatable.selectionChange)
           .pipe(takeUntil(this.unmount$))
@@ -91,7 +91,7 @@ export class ProductComponent implements AfterViewInit,OnDestroy{
     }
   
     shuffleData() {
-      this.tshirts$.next(shuffle(this.tshirts$.getValue()));
+      this.Products$.next(shuffle(this.Products$.getValue()));
       this.currentSelection$.next([]);
       this.changeDetectorRef.detectChanges();
     }
@@ -125,11 +125,16 @@ export class ProductComponent implements AfterViewInit,OnDestroy{
           sortBy,
           sortType
         )
-        this.tshirts$.next(product);
+        this.Products$.next(product);
         this.currentSelection$.next([]);
         this.currentPagination = pagination;
         this.changeDetectorRef.detectChanges();
-      });       
+      });   
+     
+    }
+    DeleteBulk()
+    {
+      
     }
   }
  

@@ -6,7 +6,12 @@
 /* @import "~ng2-md-datatable/datatable-theme";  */
 
 body{
-    padding-top: 4px;
+    padding-top: 0px;
+}
+
+.paddingtop
+{
+    padding-top: 20px;
 }
 /* @include angular-material-theme($theme);
 @include mat-datatable-theme($theme); */

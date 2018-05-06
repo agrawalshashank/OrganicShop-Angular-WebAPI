@@ -1,0 +1,11 @@
+<div class="col-md-6"  *ngFor="let product of productList">
+  <div class="card" style="width: 15rem;">
+          <img class="card-img-top" [src]="product.ImageURL" alt="Card image cap">
+          <div class="card-body">
+            <h3 class="card-title">{{product.ProductName}}</h3>
+            <h5 class="card-title">{{product.Category}}</h5>
+            <p class="card-text">{{product.Price | currency:'INR'}}</p>
+            <button class="btn btn-primary" style="width: 11rem" >Add to Cart</button>
+          </div>
+   </div>
+</div>

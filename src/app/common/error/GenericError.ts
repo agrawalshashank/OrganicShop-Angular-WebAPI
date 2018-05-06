@@ -2,8 +2,8 @@ import { ErrorHandler } from "@angular/core";
 
  export class GenericError implements ErrorHandler{
 
-    handleError()
+    handleError(error)
     {
-        
+      console.log(error);   
     }
  }
