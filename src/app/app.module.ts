@@ -1,3 +1,4 @@
+import { CategoryService } from './service/category/category.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
@@ -24,6 +25,7 @@ import { AppService } from './user/product/app.service';
 import { GenericError } from './common/error/GenericError';
 import { LoginService } from './service/auth/login/login.service';
 import { ProductListComponent } from './user/product-list/product-list/product-list.component';
+import { ManageCategoryComponent } from './admin/manage-category/manage-category/manage-category.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { ProductListComponent } from './user/product-list/product-list/product-l
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    ProductListComponent
+    ProductListComponent,
+    ManageCategoryComponent
 
     
   ],
@@ -71,7 +74,8 @@ import { ProductListComponent } from './user/product-list/product-list/product-l
     LoginService,
     GenericError,
     AppService,
-    ProductService
+    ProductService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
