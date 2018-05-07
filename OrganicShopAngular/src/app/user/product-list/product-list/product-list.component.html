@@ -4,7 +4,7 @@
     <div class="list-group">
     <a class="list-group-item list-group-item-action" 
     *ngFor="let category of categoryList"
-    routerLink="/productList/"
+    routerLink="/productList"
     [queryParams]="{category:category.CategoryName}"    
     >{{category.CategoryName}}</a>
     </div>

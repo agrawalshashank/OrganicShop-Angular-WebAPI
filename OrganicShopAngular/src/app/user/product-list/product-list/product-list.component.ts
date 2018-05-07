@@ -1,6 +1,7 @@
 import { CategoryService } from './../../../service/category/category.service';
 import { ProductService } from './../../../service/product/product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -11,11 +12,29 @@ export class ProductListComponent implements OnInit , OnDestroy {
 isAlive: boolean=true;
 productList
 categoryList
+private categoryId: string
 
-  constructor(
+
+  constructor
+  (
+    private route:Router,
+    private activatedRoute:ActivatedRoute,
     private productService:ProductService,
     private categoryService:CategoryService
   ) { 
+
+    this.activatedRoute.queryParamMap.subscribe(params=>{
+     this.categoryId= params.get("category");
+    });
+    
+    console.log(this.categoryId);
+    if(this.categoryId)
+    {
+      this.productService.getProductByCategory(this.categoryId).takeWhile(()=> this.isAlive)
+      .subscribe(response=>{
+        this.productList=response.json();
+      })
+    }
 
     this.productService.getallProducts().takeWhile(()=>this.isAlive).
     subscribe(response=>{

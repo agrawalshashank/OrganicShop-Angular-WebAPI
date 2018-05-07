@@ -89,4 +89,21 @@ export class ProductService {
     )
   }
 
+  getProductByCategory(id:string)
+  {
+     return this.product.get(this.url +'categorybyName?Category='+ id).
+      catch((error:Response)=>
+        {
+          if(error.status==404)
+          {
+            return _throw(new NotFound404(error));
+          }
+          else
+          {
+            return _throw(new GenericError());
+          }
+        }
+    )
+  }
+
 }
